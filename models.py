@@ -18,19 +18,4 @@ class Siparis:
     fiyat: int
     kullanilanlar: List[HammaddeMiktari]
 
-    def aciklama_olustur(self) -> str:
-        parcalari = []
-
-        for item in self.kullanilanlar:
-            adet = str(item.adet)
-            ad = item.hammadde.ad
-            parca = adet + "x " + ad # Bu daha sonra dört doz gibi sayısal ifade edilecek şekilde güncellenecek
-            parcalari.append(parca)
-
-        tarif = ", ".join(parcalari)
-
-        mesaj = (
-            self.kahve_adi + " seçtiniz. Bu içeceğimiz " + tarif + " içermektedir. Afiyet olsun."
-        )
-
-        return mesaj
+    

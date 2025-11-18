@@ -1,5 +1,5 @@
 from menu import Menu
-
+from OrderMessageBuilder import SiparisAciklayici
 
 def main():
     menu = Menu()
@@ -22,8 +22,12 @@ def main():
         print("Geçersiz kahve numarası.")
         return
 
+    aciklayici = SiparisAciklayici()
+
     print("\nTeşekkürler kahveniz hazırlanıyor.\n")
-    print(siparis.aciklama_olustur())
+
+    aciklama = aciklayici.aciklama_olustur(siparis)
+    print(aciklama)
 
 
 if __name__ == "__main__":
