@@ -5,14 +5,10 @@ def main():
     menu = Menu()
 
     print("Kafe Sipariş Uygulamasına Hoş Geldiniz!\n")
-    print("1. Espresso (60 ₺)")
-    print("2. Double Espresso (90 ₺)")
-    print("3. Cappuccino (85 ₺)")
-    print("4. Caffe Latte (95 ₺)")
-    print("5. Mocha (110 ₺)")
-    print("6. Americano (100 ₺)")
-    print("7. Hot Water (15 ₺)\n")
+    print("Menümüz bu şekildedir:\n")
 
+    for kod, kahve_adi, kahve_fiyati in menu.menu_icerikleri():
+        print(kod,"-", kahve_adi, ":", kahve_fiyati, "₺")
     secim = input("Lütfen içmek istediğiniz kahvenin numarasını giriniz: ")
 
     if not secim.isdigit():
