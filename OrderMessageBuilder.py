@@ -2,6 +2,7 @@ from models import Siparis
 
 
 class SiparisAciklayici:
+    ## Sipariş açıklamalarını oluşturan sınıf.
     def aciklama_olustur(self, siparis: Siparis) -> str:
         parcalari = []
 
