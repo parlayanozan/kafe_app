@@ -1,6 +1,7 @@
 from typing import Optional
 
 from models import Hammadde, HammaddeMiktari, Siparis
+from exceptions import InvalidCoffeeCodeError
 
 class Menu:
     """Menüdeki tüm kahve seçeneklerini ve sipariş oluşturma mantığını tutar."""
@@ -25,6 +26,11 @@ class Menu:
             (7, "Hot Water", 15),
             
         ]
+    def menu_icerik_sayisi(self) -> int:
+        icerikler = self.menu_icerikleri()
+        uzunluk = len(icerikler)
+        return uzunluk
+    
     def _kahve_bilgisi_bul(self, kahve_kodu: int):
         for kod, ad, fiyat in self.menu_icerikleri():
             if kod == kahve_kodu:
@@ -66,11 +72,12 @@ class Menu:
     def siparis_olustur(self, kahve_kodu: int) -> Optional[Siparis]:
         ad, fiyat = self._kahve_bilgisi_bul(kahve_kodu)
         if ad is None:
-            return None
+            raise InvalidCoffeeCodeError("Geçersiz kahve kodu.")
+
 
         tarif_haritasi = self._tarif_haritasi()
         if kahve_kodu not in tarif_haritasi:
-            return None
+            raise InvalidCoffeeCodeError("Geçersiz kahve kodu.")
 
         kullanilanlar = []
 
@@ -86,5 +93,4 @@ class Menu:
         )
 
         return siparis
-        # Geçersiz kod girilirse None döndür
-        return None
+    

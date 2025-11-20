@@ -1,30 +1,39 @@
 from menu import Menu
 from OrderMessageBuilder import SiparisAciklayici
+from exceptions import InvalidCoffeeCodeError
+
 
 def main():
     menu = Menu()
+    aciklayici = SiparisAciklayici()
 
     print("Kafe Sipariş Uygulamasına Hoş Geldiniz!\n")
-    print("Menümüz bu şekildedir:\n")
+    print("Menü:")
 
-    for kod, kahve_adi, kahve_fiyati in menu.menu_icerikleri():
-        print(kod,"-", kahve_adi, ":", kahve_fiyati, "₺")
-    secim = input("Lütfen içmek istediğiniz kahvenin numarasını giriniz: ")
+    for kod, ad, fiyat in menu.menu_icerikleri():
+        print(f"{kod}. {ad} ({fiyat} ₺)")
+
+    print("\nÇıkmak için 'exit' yazabilirsiniz.\n")
+
+    secim = input("Lütfen içmek istediğiniz kahvenin numarasını giriniz: ").strip()
+
+    if secim.lower() == "exit":
+        print("Uygulamadan çıkılıyor. İyi günler.")
+        return
 
     if not secim.isdigit():
-        print("Geçersiz giriş. Lütfen sayı giriniz.")
+        print("Geçersiz giriş. Lütfen bir sayı ya da 'exit' yazınız.")
         return
 
     kod = int(secim)
-    siparis = menu.siparis_olustur(kod)
 
-    if siparis is None:
+    try:
+        siparis = menu.siparis_olustur(kod)
+    except InvalidCoffeeCodeError:
         print("Geçersiz kahve numarası.")
         return
 
-    aciklayici = SiparisAciklayici()
-
-    print("\nTeşekkürler kahveniz hazırlanıyor.\n")
+    print("\nTeşekkürler, kahveniz hazırlanıyor.\n")
 
     aciklama = aciklayici.aciklama_olustur(siparis)
     print(aciklama)

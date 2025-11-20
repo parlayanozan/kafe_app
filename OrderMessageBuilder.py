@@ -8,7 +8,7 @@ class SiparisAciklayici:
         for item in siparis.kullanilanlar:
             adet = str(item.adet)
             ad = item.hammadde.ad
-            parca = adet + " doz " + ad # Bu daha sonra dört doz gibi sayısal ifade edilecek şekilde güncellenecek
+            parca = adet + " doz " + ad 
             parcalari.append(parca)
 
         tarif = ", ".join(parcalari)
